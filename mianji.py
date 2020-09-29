@@ -15,7 +15,7 @@ else:
     while j <= len(list1):
         n+=int(list1(j))
         j+=1
-    m = n*2*math.pi
+    m = n*b
     print(m)
 
 
