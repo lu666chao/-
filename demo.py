@@ -1,29 +1,18 @@
-len_max = 0
-text1t = []
-space = ''
-new_list = []
-file = open('C:\\Users\lyc\AppData\Roaming\JetBrains\PyCharmCE2020.1\scratches\demo.py','r')
-file_txt = file.readlines()
-file.close()
-text_list = len(file_txt)
-for text in file_txt:
-    text_str = len(text)
-    if text_str > len_max:
-        len_max = text_str
-    if text[-1] == '\n':
-        text_list.append(text[:-1])
-    else:
-        text_list.append(text)
-for new_text in text_list:
-    while True:
-        if len(new_text)+len(space) == len_max:
-            new_list.append(new_text+space+'#')
-            space = ''
-            break
-        else:
-            space += ' '
+filename = 'demo.py'
+  
+with open(filename,'r',encoding='utf-8') as fp:
+      lines = fp.readlines()          #读取所有行
+  
+  #获取最长的行的长度
+  maxLength = max(map(len,lines))
+  print(maxLength)
+  #遍历所有行
+for index,line in enumerate(lines):
+     newLine = line.rstrip()            #删除每行右侧的空白字符
+     newLine = newLine + ' ' * (maxLength - len(newLine))   #在每行右侧填充空格
+     newLine = newLine + '#' + str(index + 1) + '\n'            #在每行右侧增加行号
+    lines[index] = newLine                                     #把新组装的行放到列表中
 
-demo_file = open('C:\\Users\lyc\AppData\Roaming\JetBrains\PyCharmCE2020.1\scratches\demo_new.py', 'w')
-for i in range(1,text_list):
-    demo_file.write(new_list[i-1]+str(i)+'\n')
-demo_file.close()
+#把新组装的列中写入到demo_new.py文件中
+with open('demo_new.py','w',encoding='UTF-8') as fp:
+     fp.writelines(lines)
